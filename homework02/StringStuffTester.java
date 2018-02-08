@@ -1,14 +1,15 @@
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  File name     :  StringStuffTester.java
  *  Purpose       :  A test harness file for testing out the methods in the "StringStuff.java" class
- *  Author        :  B.J. Johnson
- *  Date          :  2017-01-25
+ *  Author        :  B.J. Johnson (prototype)
+ *  Date          :  2017-01-25 (prototype)
+ *  Author        :  Jeremy Goldberg
+ *  Date          :  2018-02-08
  *  Description   :  This file provides the "test harness" for checking out the methods which are part of
  *                   the homework02 assignment.  It also provides examples of proper documentation, and
  *                   uses the source file header template as specified in the "Greeter.java" template file
  *                   for use in CMSI 186, Spring 2017.
- *  Notes         :  TEMPLATE FILE ONLY: Your job is to fill in as many test cases as you think are needed
- *                   to thoroughly and completely test your StringStuff class.
+ *  Notes         :  None
  *  Warnings      :  None
  *  Exceptions    :  None
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -21,15 +22,14 @@ public class StringStuffTester {
    * @return void
    */
    public static void main ( String [] args ) {
-      System.out.println( "\nA TOTAL OF SIXTY-SEVEN TESTS TO CHECK OPERATION OF THE STRINGSTUFF CLASS METHODS");
-      test_containsVowel();      // sixteen tests
-      test_isPalindrome();       // ten tests
-      test_evensOnly();          // nine tests
-      test_oddsOnly();           // nine tests
-      test_evensOnlyNoDupes();   // eight tests
-      test_oddsOnlyNoDupes();    // nine tests
-      test_reverse();            // four tests
-      //test_removeDupes();        // fill in how many tests
+      System.out.println( "\nA TOTAL OF SEVENTY-THREE TESTS TO CHECK OPERATION OF THE STRINGSTUFF CLASS METHODS");
+      test_containsVowel();      // seventeen tests
+      test_isPalindrome();       // eleven tests
+      test_evensOnly();          // ten tests
+      test_oddsOnly();           // ten tests
+      test_evensOnlyNoDupes();   // nine tests
+      test_oddsOnlyNoDupes();    // ten tests
+      test_reverse();            // six tests
    }
 
   /**
@@ -99,6 +99,10 @@ public class StringStuffTester {
 
       System.out.print( "   Test for string containing numbers and symbols with 'a' at the end: " );
       try { System.out.println( StringStuff.containsVowel( "1234567890!@#$%^&*()a" ) ? "true" : "false" ); }
+      catch( Exception e ) { System.out.println ( false ); }
+
+      System.out.print( "   Test for detecting empty string '': " );
+      try { System.out.println( StringStuff.containsVowel( "" ) ? "true" : "false" ); }
       catch( Exception e ) { System.out.println ( false ); }
 
    }
@@ -195,6 +199,10 @@ public class StringStuffTester {
       try { System.out.println( (0 == StringStuff.evensOnly( "REhe12ar^^SALsz" ).compareTo("RhrLz")) ? "got it" : "don't got it" ); }
       catch( Exception e ) { System.out.println ( false ); }
 
+      System.out.print( "   Testing '' should return : " );
+      try { System.out.println( (0 == StringStuff.evensOnly( "" ).compareTo("")) ? "got it" : "don't got it" ); }
+      catch( Exception e ) { System.out.println ( false ); }
+
    }
 
   /**
@@ -238,6 +246,10 @@ public class StringStuffTester {
       try { System.out.println( (0 == StringStuff.oddsOnly( "xylophones" ).compareTo( "yooes" )) ? "got it" : "don't got it" ); }
       catch( Exception e ) { System.out.println ( false ); }
 
+      System.out.print( "   Testing '' should return : " );
+      try { System.out.println( (0 == StringStuff.oddsOnly( "" ).compareTo("")) ? "got it" : "don't got it" ); }
+      catch( Exception e ) { System.out.println ( false ); }
+
    }
 
   /**
@@ -275,6 +287,10 @@ public class StringStuffTester {
 
       System.out.print( "   Testing 'ACEGIKMOQSUWYACEGIKMOQSUWY' should return the empty string: " );
       try { System.out.println( (0 == StringStuff.evensOnlyNoDupes( "ACEGIKMOQSUWYACEGIKMOQSUWY" ).compareTo("")) ? "got it" : "don't got it" ); }
+      catch( Exception e ) { System.out.println ( false ); }
+
+      System.out.print( "   Testing '' should return : " );
+      try { System.out.println( (0 == StringStuff.evensOnlyNoDupes( "" ).compareTo("")) ? "got it" : "don't got it" ); }
       catch( Exception e ) { System.out.println ( false ); }
 
    }
@@ -320,6 +336,10 @@ public class StringStuffTester {
       try { System.out.println( (0 == StringStuff.oddsOnlyNoDupes( "Aa" ).compareTo("Aa")) ? "got it" : "don't got it" ); }
       catch( Exception e ) { System.out.println ( false ); }
 
+      System.out.print( "   Testing '' should return : " );
+      try { System.out.println( (0 == StringStuff.oddsOnlyNoDupes( "" ).compareTo("")) ? "got it" : "don't got it" ); }
+      catch( Exception e ) { System.out.println ( false ); }
+
 
    }
 
@@ -344,29 +364,14 @@ public class StringStuffTester {
       try { System.out.println( (0 == StringStuff.reverse( "shut the front door 1234567890" ).compareTo("0987654321 rood tnorf eht tuhs")) ? "got it" : "don't got it" ); }
       catch( Exception e ) { System.out.println ( false ); }
 
+      System.out.print( "   Testing 'racecar' should return racecar: " );
+      try { System.out.println( (0 == StringStuff.reverse( "racecar" ).compareTo("racecar")) ? "got it" : "don't got it" ); }
+      catch( Exception e ) { System.out.println ( false ); }
+
+      System.out.print( "   Testing '' should return : " );
+      try { System.out.println( (0 == StringStuff.reverse( "" ).compareTo("")) ? "got it" : "don't got it" ); }
+      catch( Exception e ) { System.out.println ( false ); }
+
    }
-
-  /**
-   * test method to test out the operation of the removeDupes method
-   */
-   //public static void test_removeDupes() {
-   //   System.out.println( "\nFOUR TESTS FOR removeDupes():" );
-   //   System.out.print( "   Testing 'xylophones' should return xylophnes: " );
-   //   try { System.out.println( (0 == StringStuff.removeDupes( "xylophones" ).compareTo( "xylophnes" )) ? "got it" : "don't got it" ); }
-   //   catch( Exception e ) { System.out.println ( false ); }
-
-   //   System.out.print( "   Testing 'XYloPHonES' should return XYloPHnES: " );
-   //   try { System.out.println( (0 == StringStuff.removeDupes( "XYloPHonES" ).compareTo("XYloPHnES")) ? "got it" : "don't got it" ); }
-   //   catch( Exception e ) { System.out.println ( false ); }
-
-    //  System.out.print( "   Testing 'AmanAplanAcAnalpAnamA' should return Amanplc: " );
-    //  try { System.out.println( (0 == StringStuff.removeDupes( "AmanAplanAcAnalpAnamA" ).compareTo("Amanplc")) ? "got it" : "don't got it" ); }
-    //  catch( Exception e ) { System.out.println ( false ); }
-
-     // System.out.print( "   Testing 'shutTheFrontDoor11233455677890' should return shutTeFronD1234567890: " );
-     // try { System.out.println( (0 == StringStuff.removeDupes( "shutTheFrontDoor11234567890" ).compareTo("shutTeFronD1234567890")) ? "got it" : "don't got it" ); }
-     // catch( Exception e ) { System.out.println ( false ); }
-
-   //}
 
 }
