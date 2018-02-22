@@ -3,7 +3,8 @@
  *  Purpose       :  User based high roll game
  *  Author        :  Jeremy Goldberg
  *  Date          :  2018-02-22
- *  Description   :
+ *  Description   :  A simple game that rolls some dice with some amount of sides determined by the user.
+                     The user can roll again or save the score.
  *  Notes         :  None
  *  Warnings      :  None
  *  Exceptions    :  None
