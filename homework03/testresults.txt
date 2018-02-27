@@ -1,0 +1,1037 @@
+Your roll is: 11
+The value is: 11
+The number of sides is: 11
+The string representation is: 11
+Your roll is: 9
+The value is: 9
+The number of sides is: 10
+The string representation is: 9
+Your roll is: 2
+The value is: 2
+The number of sides is: 9
+The string representation is: 2
+Your roll is: 4
+The value is: 4
+The number of sides is: 8
+The string representation is: 4
+Your roll is: 3
+The value is: 3
+The number of sides is: 7
+The string representation is: 3
+Your roll is: 1
+The value is: 1
+The number of sides is: 6
+The string representation is: 1
+Your roll is: 4
+The value is: 4
+The number of sides is: 5
+The string representation is: 4
+Your roll is: 2
+The value is: 2
+The number of sides is: 4
+The string representation is: 2
+Caught small number of sides
+The ds is: 1, 2, 3, 6, 5
+The sum of the dice values is: 17
+Rerolling 4th die
+The ds is: 1, 2, 3, 6, 5
+The 4th dice value is: 6
+The number of dice is: 5
+The new ds is: 3, 6, 1, 4, 4
+Are the sets equal: false
+TESTING THE DIE CLASS: TEST CONSTRUCTOR FOR INVALID NUMBERS OF SIDES:
+   Too few sides requested to constructor....
+   Too few sides requested to constructor....
+   Too few sides requested to constructor....
+   Too few sides requested to constructor....
+TESTING THE DIE CLASS: TESTS ON 4-SIDED DIE:
+   roll() test for 4 sided die: 
+   You rolled a 2
+   You rolled a 3
+   You rolled a 3
+   You rolled a 4
+   You rolled a 3
+   Current value is: 3
+TESTING THE DIE CLASS: TESTS ON 5-SIDED DIE:
+   roll() test for 5 sided die: 
+   You rolled a 4
+   You rolled a 5
+   You rolled a 4
+   You rolled a 1
+   You rolled a 4
+   Current value is: 4
+TESTING THE DIE CLASS: TESTS ON 6-SIDED DIE:
+   roll() test for 6 sided die: 
+   You rolled a 5
+   You rolled a 3
+   You rolled a 4
+   You rolled a 5
+   You rolled a 2
+   Current value is: 2
+TESTING THE DIE CLASS: TESTS ON 7-SIDED DIE:
+   roll() test for 7 sided die: 
+   You rolled a 6
+   You rolled a 3
+   You rolled a 6
+   You rolled a 6
+   You rolled a 5
+   Current value is: 5
+TESTING THE DIE CLASS: TESTS ON 8-SIDED DIE:
+   roll() test for 8 sided die: 
+   You rolled a 1
+   You rolled a 7
+   You rolled a 6
+   You rolled a 1
+   You rolled a 5
+   Current value is: 5
+TESTING THE DIE CLASS: TESTS ON 11-SIDED DIE USING NEW SIDE COUNT:
+   Rolling with new side count -- 
+      You rolled a 6
+      You rolled a 4
+      You rolled a 5
+      You rolled a 4
+      You rolled a 8
+TESTING THE DIE CLASS: TESTS ON 17-SIDED DIE USING NEW SIDE COUNT:
+   Rolling with new side count -- 
+      You rolled a 16
+      current value is: 16
+TESTING THE DIE CLASS: TESTS ON 111-SIDED DIE USING NEW SIDE COUNT:
+   Rolling with new side count -- 
+      You rolled a 73
+      current value is: 73
+......End of Die Class Testing.....
+
+
+TESTING THE DICESET CLASS: TEST CONSTRUCTOR FOR 3 SIX-SIDED DICE:
+  DiceSet: 3 dice, six sided - ds36:
+      after collective roll ds36 contents   : 3, 2, 6
+      after individual roll(2) ds36 contents: 3, 2, 3
+      sum of dice values is: 8
+   Re-rolling all dice
+      after collective roll ds36 contents   : 6, 6, 6
+      after individual roll(2) ds36 contents: 6, 6, 3
+      sum of dice values is                 : 15
+   Test of getIndividual(): 
+      value of die at index 0: 6
+      value of die at index 1: 6
+      value of die at index 2: 3
+TESTING THE DICESET CLASS: TEST CONSTRUCTOR FOR 6 NINE-SIDED DICE:
+   DiceSet: 6 dice, nine sided - ds69:
+      after collective roll ds69 contents   : 5, 3, 7, 1, 1, 6
+      after individual roll(2) ds69 contents: 5, 3, 6, 1, 1, 6
+      sum of dice values is                 : 22
+   Re-rolling all dice
+      after collective roll ds69 contents   : 3, 5, 4, 7, 1, 4
+      after individual roll(3) ds69 contents: 3, 5, 4, 6, 1, 4
+      sum of dice values is                 : 23
+   Test of getIndividual(): 
+      value of die at index 0: 3
+      value of die at index 1: 5
+      value of die at index 2: 4
+      value of die at index 3: 6
+      value of die at index 4: 1
+      value of die at index 5: 4
+TESTING THE DICESET CLASS: TEST CONSTRUCTOR FOR 9 SEVENTEEN-SIDED DICE:
+   DiceSet: 9 dice, 17 sided - ds917:
+      after collective roll ds917 contents   : 8, 14, 7, 10, 16, 17, 3, 8, 3
+      after individual roll(6) ds917 contents: 8, 14, 7, 10, 16, 17, 12, 8, 3
+      sum of dice values is                  : 95
+   Re-rolling all dice
+      after collective roll ds917 contents   : 3, 10, 8, 13, 14, 7, 5, 12, 7
+      after individual roll(8) ds69 contents : 3, 10, 8, 13, 14, 7, 5, 12, 12
+      sum of dice values is                  : 84
+   Test of getIndividual(): 
+      value of die at index 0: 3
+      value of die at index 1: 10
+      value of die at index 2: 8
+      value of die at index 3: 13
+      value of die at index 4: 14
+      value of die at index 5: 7
+      value of die at index 6: 5
+      value of die at index 7: 12
+      value of die at index 8: 12
+TESTING THE DICESET CLASS: TEST 'isIdentical()' FOR 9 SEVENTEEN-SIDED DICE:
+   Test of isIndentical(): 
+      Test of ds917 against ds69   : false
+      Test of ds917 against itself : true
+TESTING THE DICESET CLASS: TEST 'isIdentical()' FOR NEW SET OF 9 SEVENTEEN-SIDED DICE:
+   DiceSet ds917 contents       : 14, 9, 1, 12, 9, 6, 14, 14, 4
+      New DiceSet ds2_917 contents : 16, 10, 11, 10, 15, 8, 2, 9, 10
+      Test of ds917 against ds2_917: false
+......End of DiceSet Class Testing.....
+
+
+
+  This is High Roll!
+
+  How many dice would you like?
+>> 
+  How many sides should the dice have?
+>> 
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 5, 4, 2, 4, 2
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 1, 4, 6, 6, 4
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 4, 3, 6, 3, 4
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 6
+  Your roll is: 4, 3, 6, 3, 4
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 6
+  Your roll is: 4, 3, 6, 3, 6
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 3
+  Your roll is: 4, 3, 6, 3, 6
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your score is: 22
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Saved!
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your highscore is: 22
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 2, 3, 2, 2, 3
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 3, 4, 3, 6, 5
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 4
+  Your roll is: 3, 4, 3, 6, 4
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 5
+  Your roll is: 5, 4, 3, 6, 4
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your score is: 22
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Saved!
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your highscore is: 22
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  This is High Roll!
+
+  How many dice would you like?
+>> 
+  How many sides should the dice have?
+>> 
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 5, 9, 3, 10, 6, 4, 11, 16, 4, 9, 9
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 9, 16, 10, 2, 9, 17, 14, 14, 1, 1, 17
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 6, 9, 3, 13, 8, 1, 15, 15, 2, 11, 17
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 12
+  Your roll is: 6, 9, 3, 13, 8, 1, 15, 15, 2, 11, 12
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 3
+  Your roll is: 3, 9, 3, 13, 8, 1, 15, 15, 2, 11, 12
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 2
+  Your roll is: 3, 9, 3, 13, 8, 1, 2, 15, 2, 11, 12
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your score is: 79
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Saved!
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your highscore is: 79
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 15, 13, 12, 7, 2, 4, 3, 5, 9, 13, 7
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 11, 10, 10, 1, 3, 6, 12, 16, 10, 11, 7
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 7
+  Your roll is: 11, 10, 10, 1, 7, 6, 12, 16, 10, 11, 7
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 16
+  Your roll is: 11, 10, 16, 1, 7, 6, 12, 16, 10, 11, 7
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your score is: 107
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Saved!
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your highscore is: 107
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  This is High Roll!
+
+  How many dice would you like?
+>> 
+  How many sides should the dice have?
+>> 
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 3, 4, 3, 2, 4, 3, 1, 2, 3, 4, 3, 4, 1, 3, 4, 1, 4, 2, 1, 1, 3, 3, 1, 3, 2, 4, 3, 2, 3
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 2, 3, 1, 3, 3, 4, 2, 1, 1, 2, 2, 4, 2, 4, 3, 3, 2, 1, 1, 1, 2, 2, 2, 2, 1, 3, 1, 1, 1
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 2, 1, 1, 2, 1, 1, 3, 4, 1, 2, 3, 3, 3, 2, 3, 4, 1, 3, 4, 3, 2, 3, 1, 1, 2, 3, 1, 4, 4
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 4
+  Your roll is: 2, 1, 1, 2, 1, 1, 3, 4, 1, 2, 3, 3, 3, 2, 3, 4, 1, 3, 4, 3, 2, 3, 1, 1, 2, 3, 1, 4, 4
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 3
+  Your roll is: 3, 1, 1, 2, 1, 1, 3, 4, 1, 2, 3, 3, 3, 2, 3, 4, 1, 3, 4, 3, 2, 3, 1, 1, 2, 3, 1, 4, 4
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 4
+  Your roll is: 3, 1, 1, 2, 1, 1, 3, 4, 1, 2, 3, 3, 3, 2, 3, 4, 4, 3, 4, 3, 2, 3, 1, 1, 2, 3, 1, 4, 4
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your score is: 72
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Saved!
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your highscore is: 72
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 2, 4, 3, 2, 3, 4, 4, 4, 3, 4, 4, 2, 3, 2, 4, 3, 3, 4, 3, 1, 4, 4, 3, 4, 1, 3, 4, 4, 4
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your roll is: 1, 4, 3, 1, 3, 2, 4, 1, 3, 3, 1, 1, 3, 2, 1, 1, 2, 2, 2, 4, 4, 2, 3, 4, 2, 3, 2, 2, 4
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 3
+  Your roll is: 1, 4, 3, 1, 3, 2, 4, 1, 3, 3, 1, 1, 3, 2, 1, 1, 2, 2, 3, 4, 4, 2, 3, 4, 2, 3, 2, 2, 4
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Which die should be rerolled?
+>> 
+  The new die value is: 2
+  Your roll is: 1, 4, 3, 1, 3, 2, 4, 1, 3, 3, 1, 1, 3, 2, 1, 1, 2, 2, 3, 4, 4, 2, 2, 4, 2, 3, 2, 2, 4
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your score is: 70
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Saved!
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
+  Your highscore is: 70
+
+  Choose an option :)
+
+  1: Roll all the dice
+
+  2: Reroll a single die
+
+  3: Calculate a score for this set
+
+  4: Save this score as a high score
+
+  5: Display the high score
+
+  Q: Quit
+>> 
