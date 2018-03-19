@@ -1,0 +1,36 @@
+
+Evaluation for homework 04: Clock Solver
+
+Clock and ClockSolver programs
+Includes running Clock main to observe tests
+Includes running automated ClockSolver tests
+   View testH$4.bat to see test parameters used
+===============================================
+
+A total of one point each for the following:
+
+class Clock             : Exists, coding style acceptable   -  1 point
+Constructor             : Freebie, since not really needed  -  1 point
+tick                    : works                             -  1 point
+getHourHandAngle        : works                             -  1 point
+getMinuteHandAngle      : works                             -  1 point
+getHandAngle            : works                             -  1 point
+getTotalSeconds         : works                             -  1 point
+toString                : works                             -  1 point
+main exists             : Exists                            -  1 point
+Test Code               : Contains some method test code    -  1 point
+
+class ClockSolver       : Exists, coding style acceptable   -  1 point
+Constructor             : Exists, works properly            -  1 point
+HandleInitialArguments  : works                             -  2 point
+   handled all bad inputs -- good job!
+main exists             : works                             -  1 point
+works as advertised     : passes all tests in the series    -  9 points
+Files in Git            : two files required                -  2 points
+Coding Style overall    : coding style acceptable           -  1 point
+
+
+Total 27 out of 27 = 100% which is an A-plus
+
+Nice work!
+
