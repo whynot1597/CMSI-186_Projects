@@ -3,6 +3,8 @@
  * Purpose    :  Find the "nth" Fibonacci number given an argument, using BrobInt class
  * @author    :  B.J. Johnson
  * Date       :  2017-04-17
+ * @author    :  Jeremy Goldberg
+ * Date       :  2018-04-19
  * Description:  @see <a href='http://bjohnson.lmu.build/cmsi186web/homework06.html'>Assignment Page</a>
  * Notes      :  None
  * Warnings   :  None
