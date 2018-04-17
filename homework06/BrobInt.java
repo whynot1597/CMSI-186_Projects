@@ -10,7 +10,6 @@
  * Warnings   :  None
  *
  *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  import java.util.Arrays;
 
 public class BrobInt {
 
@@ -57,9 +56,14 @@ public class BrobInt {
       value = value.substring(1);
     }
     
-    //TODO Strip 0s
+    //Strip 0s
     while (value.charAt(0) == Character.valueOf('0') && value.length() > 1) {
       value = value.substring(1);
+    }
+    
+    //Convert -0 to +0
+    if (value.charAt(0) == Character.valueOf('0')) {
+      this.sign = 0;
     }
     
     this.internalValue = value;
@@ -76,101 +80,62 @@ public class BrobInt {
   }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   *  Method to validate that all the characters in the value are valid decimal digits
-   *  @return  boolean  true if all digits are good
-   *  @throws  IllegalArgumentException if something is hinky
-   *  note that there is no return false, because of throwing the exception
-   *  note also that this must check for the '+' and '-' sign digits
-   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-  public boolean validateDigits() {
-     return true;
-  }
-
-  /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   *  Method to reverse the value of this BrobInt
-   *  @return BrobInt that is the reverse of the value of this BrobInt
-   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-  public BrobInt reverser() {
-     throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
-  }
-
-  /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   *  Method to reverse the value of a BrobIntk passed as argument
-   *  Note: static method
-   *  @param  gint         BrobInt to reverse its value
-   *  @return BrobInt that is the reverse of the value of the BrobInt passed as argument
-   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-  public static BrobInt reverser( BrobInt gint ) {
-     throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
-  }
-
-  /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   *  Method to add the value of a BrobIntk passed as argument to this BrobInt using int array
+   *  Method to add the value of a BrobInt passed as argument to this BrobInt using int array
    *  @param  gint         BrobInt to add to this
    *  @return BrobInt that is the sum of the value of this BrobInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */   
   public BrobInt add(BrobInt gint) {     
-    try {
-      int first = Integer.parseInt(this.toString());
-      int second = Integer.parseInt(gint.toString()); 
-      int result = first + second;
-      if ((first > 0 && second > 0 && result < 0) ||
-          (first < 0 && second < 0 && result > 0)) {
-        throw new NumberFormatException ("Result is too large so must use BrobInt");
-      }  
-      return new BrobInt(Integer.toString(result));
+    if (this.abs().compareTo(ZERO) == 0) {
+      return gint;
     }
-    catch (NumberFormatException nfe) {
-      if (this.abs().compareTo(ZERO) == 0) {
-        return gint;
-      }
-      if (gint.abs().compareTo(ZERO) == 0) {
-        return this;
-      }
-      
-      BrobInt resultBrobInt = null;
-      
-      if (gint.sign == 1 && this.sign == 0) {
-        return this.subtract(gint.abs());
-      } else if (gint.sign == 1 && this.sign == 1) {
-        resultBrobInt = this.abs().add(gint.abs());
-        resultBrobInt.sign = 1;
-        return resultBrobInt;
-      } else if (gint.sign == 0 && this.sign == 1) {
-        return gint.subtract(this.abs());
-      } else {
-        int compareTest = this.compareTo(gint);
-        BrobInt biggerBrobInt = null;
-        BrobInt smallerBrobInt = null;
-         
-        if (compareTest <= 0) {
-          biggerBrobInt = new BrobInt(gint.toString());
-          smallerBrobInt = new BrobInt(this.toString());
-        } else {
-          biggerBrobInt = new BrobInt(this.toString());
-          smallerBrobInt = new BrobInt(gint.toString());
-        }
-        int[] intVersionOutput = new int[biggerBrobInt.intVersion.length + 1];
-         
-        for (int i = 0; i < intVersionOutput.length; i++) {
-          if (i < biggerBrobInt.intVersion.length) {
-            int addend = 0;
-            if (i < smallerBrobInt.intVersion.length) {
-              addend = smallerBrobInt.intVersion[i];
-            }
-            int value = biggerBrobInt.intVersion[i] + addend + intVersionOutput[i];
-            if (value >= 10) {
-              intVersionOutput[i] = value - 10;
-              intVersionOutput[i + 1] = 1;
-            } else {
-              intVersionOutput[i] = value;
-            }
-          }
-        }
-        resultBrobInt = new BrobInt(intArrayToString(intVersionOutput));
-      }
+    if (gint.abs().compareTo(ZERO) == 0) {
+      return this;
+    }
+    
+    BrobInt resultBrobInt = null;
+    
+    if (gint.sign == 1 && this.sign == 0) {
+      return this.subtract(gint.abs());
+    } 
+    if (gint.sign == 1 && this.sign == 1) {
+      resultBrobInt = this.abs().add(gint.abs());
+      resultBrobInt.sign = 1;
       return resultBrobInt;
     }
+    if (gint.sign == 0 && this.sign == 1) {
+      return gint.subtract(this.abs());
+    }
+    
+    int compareTest = this.compareTo(gint);
+    BrobInt biggerBrobInt = null;
+    BrobInt smallerBrobInt = null;
+     
+    if (compareTest <= 0) {
+      biggerBrobInt = new BrobInt(gint.toString());
+      smallerBrobInt = new BrobInt(this.toString());
+    } else {
+      biggerBrobInt = new BrobInt(this.toString());
+      smallerBrobInt = new BrobInt(gint.toString());
+    }
+    int[] intVersionOutput = new int[biggerBrobInt.intVersion.length + 1];
+     
+    for (int i = 0; i < intVersionOutput.length; i++) {
+      if (i < biggerBrobInt.intVersion.length) {
+        int addend = 0;
+        if (i < smallerBrobInt.intVersion.length) {
+          addend = smallerBrobInt.intVersion[i];
+        }
+        int value = biggerBrobInt.intVersion[i] + addend + intVersionOutput[i];
+        if (value >= 10) {
+          intVersionOutput[i] = value - 10;
+          intVersionOutput[i + 1] = 1;
+        } else {
+          intVersionOutput[i] = value;
+        }
+      }
+    }
+    resultBrobInt = new BrobInt(intArrayToString(intVersionOutput));
+    return resultBrobInt;
   }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -180,77 +145,67 @@ public class BrobInt {
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    
   public BrobInt subtract( BrobInt gint ) {
-    try {
-      int first = Integer.parseInt(this.toString());
-      int second = Integer.parseInt(gint.toString());      
-      int result = first - second;
-      if ((first > 0 && second < 0 && result < 0) ||
-          (first < 0 && second > 0 && result > 0)) {
-        throw new NumberFormatException ("Result is too large so must use BrobInt"); 
-      }
-      return new BrobInt(Integer.toString(result));
+    if (this.abs().compareTo(ZERO) == 0) {
+      return gint;
     }
-    catch (NumberFormatException nfe) {
-      if (this.abs().compareTo(ZERO) == 0) {
-        return gint;
-      }
-      if (gint.abs().compareTo(ZERO) == 0) {
-        return this;
-      }
-      
-      BrobInt resultBrobInt = null;
-      
-      if (this.sign == 1 && gint.sign == 0) {
-        resultBrobInt = this.abs().add(gint);
-        resultBrobInt.sign = 1;
-      } else if (this.sign == 1 && gint.sign == 1) {
-        resultBrobInt = this.add(gint.abs());
-      } else if (this.sign == 0 && gint.sign == 1) {
-        resultBrobInt = this.add(gint.abs());
-      } else {
-        int compareTest = this.compareTo(gint);
-        BrobInt biggerBrobInt = null;
-        BrobInt smallerBrobInt = null;
-        
-        if (compareTest == 0) {
-          return ZERO;
-        } else if (compareTest < 0) {
-          biggerBrobInt = new BrobInt(gint.toString());
-          smallerBrobInt = new BrobInt(this.toString());
-        } else {
-          biggerBrobInt = new BrobInt(this.toString());
-          smallerBrobInt = new BrobInt(gint.toString());
-        }
-        int[] intVersionOutput = new int[biggerBrobInt.intVersion.length];
-        
-        if (biggerBrobInt.compareTo(gint) == 0) {
-          resultBrobInt = gint.subtract(this);
-          resultBrobInt.sign = 1;
-        } else {
-          for (int i = 0; i < biggerBrobInt.intVersion.length; i++) {
-            if (i < smallerBrobInt.intVersion.length) {
-              int value = biggerBrobInt.intVersion[i] - smallerBrobInt.intVersion[i] + intVersionOutput[i];
-              if (value < 0) {
-                int nonZeroIndex = i + 1;
-                for (int j = nonZeroIndex; (biggerBrobInt.intVersion[j] + intVersionOutput[j]) == 0; j++, nonZeroIndex++) {
-                  intVersionOutput[j] = 10;
-                }
-                for (int k = nonZeroIndex; k > i; k--) {
-                  intVersionOutput[k] -= 1;
-                }
-                intVersionOutput[i] = biggerBrobInt.intVersion[i] - smallerBrobInt.intVersion[i] + 10;
-              } else {
-                intVersionOutput[i] = value;
-              }
-            } else {
-              intVersionOutput[i] += biggerBrobInt.intVersion[i];
-            }
-          }
-          resultBrobInt = new BrobInt(intArrayToString(intVersionOutput));
-        }
-      }
+    if (gint.abs().compareTo(ZERO) == 0) {
+      return this;
+    }
+    
+    BrobInt resultBrobInt = null;
+    
+    if (this.sign == 1 && gint.sign == 0) {
+      resultBrobInt = this.abs().add(gint);
+      resultBrobInt.sign = 1;
       return resultBrobInt;
     }
+    if (this.sign == 1 && gint.sign == 1) {
+      return this.add(gint.abs());
+    }
+    if (this.sign == 0 && gint.sign == 1) {
+      return this.add(gint.abs());
+    }
+    int compareTest = this.compareTo(gint);
+    BrobInt biggerBrobInt = null;
+    BrobInt smallerBrobInt = null;
+    
+    if (compareTest == 0) {
+      return ZERO;
+    } else if (compareTest < 0) {
+      biggerBrobInt = new BrobInt(gint.toString());
+      smallerBrobInt = new BrobInt(this.toString());
+    } else {
+      biggerBrobInt = new BrobInt(this.toString());
+      smallerBrobInt = new BrobInt(gint.toString());
+    }
+    int[] intVersionOutput = new int[biggerBrobInt.intVersion.length];
+    
+    if (biggerBrobInt.compareTo(gint) == 0) {
+      resultBrobInt = gint.subtract(this);
+      resultBrobInt.sign = 1;
+      return resultBrobInt;
+    }
+    for (int i = 0; i < biggerBrobInt.intVersion.length; i++) {
+      if (i < smallerBrobInt.intVersion.length) {
+        int value = biggerBrobInt.intVersion[i] - smallerBrobInt.intVersion[i] + intVersionOutput[i];
+        if (value < 0) {
+          int nonZeroIndex = i + 1;
+          for (int j = nonZeroIndex; (biggerBrobInt.intVersion[j] + intVersionOutput[j]) == 0; j++, nonZeroIndex++) {
+            intVersionOutput[j] = 10;
+          }
+          for (int k = nonZeroIndex; k > i; k--) {
+            intVersionOutput[k] -= 1;
+          }
+          intVersionOutput[i] = biggerBrobInt.intVersion[i] - smallerBrobInt.intVersion[i] + 10;
+        } else {
+          intVersionOutput[i] = value;
+        }
+      } else {
+        intVersionOutput[i] += biggerBrobInt.intVersion[i];
+      }
+    }
+    resultBrobInt = new BrobInt(intArrayToString(intVersionOutput));
+    return resultBrobInt;
   }
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to multiply the value of a BrobIntk passed as argument to this BrobInt
@@ -259,16 +214,14 @@ public class BrobInt {
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
   public BrobInt multiply( BrobInt gint ) {
     BrobInt resultBrobInt = null;
-    BrobInt biggerBrobInt = null;
-    BrobInt smallerBrobInt = null;
-    int compareTest = this.compareTo(gint);
+    int[] intVersionOutput = null;
     
-    if (gint.abs().equals(ZERO) || this.abs().equals(ZERO)) {
+    if (gint.equals(ZERO) || this.equals(ZERO)) {
       return ZERO;
     }
     
     if (gint.abs().equals(ONE)) {
-      resultBrobInt = new BrobInt(this.toString()).abs();
+      resultBrobInt = new BrobInt(this.abs().toString());
       if (gint.sign != this.sign) {
         resultBrobInt.sign = 1;
       }
@@ -276,13 +229,35 @@ public class BrobInt {
     }
     
     if (this.abs().equals(ONE)) {
-      resultBrobInt = new BrobInt(this.toString()).abs();
+      resultBrobInt = new BrobInt(gint.abs().toString());
       if (this.sign != gint.sign) {
         resultBrobInt.sign = 1;
       }
       return resultBrobInt;
     }
-   
+    
+    int thisPowerOfTen = this.getPowerOfTen();
+    if (thisPowerOfTen >= 0) {
+      resultBrobInt = gint.multiplyByPowerOfTen(thisPowerOfTen);
+      if (this.sign != gint.sign) {
+        resultBrobInt.sign = 1;
+      }
+      return resultBrobInt;
+    }
+    
+    int gintPowerOfTen = gint.getPowerOfTen();
+    if (gintPowerOfTen >= 0) {
+      resultBrobInt = this.multiplyByPowerOfTen(gintPowerOfTen);
+      if (this.sign != gint.sign) {
+        resultBrobInt.sign = 1;
+      }
+      return resultBrobInt;
+    }
+    
+    BrobInt biggerBrobInt = null;
+    BrobInt smallerBrobInt = null;
+    int compareTest = this.compareTo(gint);
+    
     if (compareTest <= 0) {
       biggerBrobInt = new BrobInt(gint.toString());
       smallerBrobInt = new BrobInt(this.toString());
@@ -292,7 +267,7 @@ public class BrobInt {
     }
     
     BrobInt[] brobIntArray = new BrobInt[smallerBrobInt.intVersion.length];
-    int[] intVersionOutput = null;
+    intVersionOutput = null;
     int startIndex = 0;
     for (int i = 0; i < smallerBrobInt.intVersion.length; i++) {
       intVersionOutput = new int[biggerBrobInt.intVersion.length + 1 + startIndex];
@@ -303,7 +278,7 @@ public class BrobInt {
         intVersionOutput[j + 1] = carryTensPlace;
       }
       brobIntArray[i] = new BrobInt(intArrayToString(intVersionOutput));
-      startIndex += 1;
+      startIndex++;
     }
 
     resultBrobInt = new BrobInt(ZERO.toString());
@@ -316,25 +291,20 @@ public class BrobInt {
     return resultBrobInt;
   }
 
-  /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /*  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to divide the value of this BrobIntk by the BrobInt passed as argument
    *  @param  gint         BrobInt to divide this by
    *  @return BrobInt that is the dividend of this BrobInt divided by the one passed in
    *  @throws IllegalArgumentException when argument is 0
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
   public BrobInt divide( BrobInt gint ) throws IllegalArgumentException {
-    if (gint.abs().equals(ZERO) ) {
+    if (gint.equals(ZERO) ) {
       throw new IllegalArgumentException("Divide by 0");
     }
-    if (this.abs().equals(ZERO) ) {
+    if (this.equals(ZERO) ) {
       return ZERO;
     }
     BrobInt resultBrobInt = null;
-    BrobInt firstBrobInt = null;
-    BrobInt secondBrobInt = null;
-    BrobInt testBrobInt = null;
-    int[] testIntVersionOutputReversed = null;
-    int absCompareTest = this.abs().compareTo(gint.abs());
     
     if (gint.abs().equals(ONE)) {
       resultBrobInt = new BrobInt(this.toString()).abs();
@@ -344,6 +314,7 @@ public class BrobInt {
       return resultBrobInt;
     }
     
+    int absCompareTest = this.abs().compareTo(gint.abs());
     if (absCompareTest == 0) {
       return ONE;
     }
@@ -351,37 +322,45 @@ public class BrobInt {
       return ZERO;
     }
     
-    firstBrobInt = new BrobInt(this.abs().toString());
-    secondBrobInt = new BrobInt(gint.abs().toString());
-    int[] firstIntVersionReversed = reverse(firstBrobInt.intVersion);
-    int[] secondIntVersionReversed = reverse(secondBrobInt.intVersion);
-    
-    int[] intVersionOutputReversed = new int[firstBrobInt.intVersion.length];
-    int i = secondBrobInt.intVersion.length - 1;
-    //TODO code main divide method
-    
-    testIntVersionOutputReversed = new int[secondBrobInt.intVersion.length + 1];
-    for (int j = 0; j < secondBrobInt.intVersion.length; j++) {
-      testIntVersionOutputReversed[j + 1] = firstIntVersionReversed[j];
+    //CASE: Divide by 10
+    int gintPowerOfTen = gint.getPowerOfTen();
+    if (gintPowerOfTen >= 0) {
+      resultBrobInt = this.divideByPowerOfTen(gintPowerOfTen);
+      if (this.sign != gint.sign) {
+        resultBrobInt.sign = 1;
+      }
+      return resultBrobInt;
     }
-    testBrobInt = new BrobInt(intArrayToString(reverse(testIntVersionOutputReversed)));
+
+    BrobInt firstBrobInt = new BrobInt(this.abs().toString());
+    BrobInt secondBrobInt = new BrobInt(gint.abs().toString());
+    BrobInt testBrobInt = null;
+    int[] firstIntVersionReversed = reverse(firstBrobInt.intVersion);
+    int[] intVersionOutputReversed = new int[firstBrobInt.intVersion.length];
+    int[] testIntVersionOutputReversed = new int[secondBrobInt.intVersion.length + 1];
     
-    if (testBrobInt.compareTo(secondBrobInt) < 0) {
+    for (int i = 0; i < firstBrobInt.intVersion.length; i++) {
       for (int j = 0; j < testIntVersionOutputReversed.length - 1; j++) {
         testIntVersionOutputReversed[j] = testIntVersionOutputReversed[j + 1];
       }
-      testIntVersionOutputReversed[testIntVersionOutputReversed.length - 1] = firstIntVersionReversed[testIntVersionOutputReversed.length - 1];
+      testIntVersionOutputReversed[testIntVersionOutputReversed.length - 1] = firstIntVersionReversed[i];
       testBrobInt = new BrobInt(intArrayToString(reverse(testIntVersionOutputReversed)));
-      i += 1;
-    }
      
-    do {
-      intVersionOutputReversed[i] += 1;
-      testBrobInt = testBrobInt.subtract(secondBrobInt);
-    } while (testBrobInt.compareTo(secondBrobInt) > 0);
-    
+      while (testBrobInt.compareTo(secondBrobInt) >= 0) {
+        intVersionOutputReversed[i]++;
+        testBrobInt = testBrobInt.subtract(secondBrobInt);
+      }
+      
+      testIntVersionOutputReversed = new int[secondBrobInt.intVersion.length + 1];
+      for (int j = 0; j < testBrobInt.intVersion.length; j++) {
+        testIntVersionOutputReversed[testIntVersionOutputReversed.length - (1 + j)] = testBrobInt.intVersion[j];
+      }
+    }
     
     resultBrobInt = new BrobInt(intArrayToString(reverse(intVersionOutputReversed)));
+    if (this.sign != gint.sign) {
+      resultBrobInt.sign = 1;
+    }
     return resultBrobInt;
   }
 
@@ -392,7 +371,8 @@ public class BrobInt {
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
   public BrobInt remainder( BrobInt gint ) {
      BrobInt flooredDivision = new BrobInt(this.divide(gint).toString());
-     return new BrobInt(this.subtract(flooredDivision).toString());
+     BrobInt flooredMultiplication = new BrobInt(flooredDivision.multiply(gint).toString());
+     return new BrobInt(this.subtract(flooredMultiplication).toString());
   }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -485,7 +465,6 @@ public class BrobInt {
    *  @return String which is the String representation of the array
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
   private static String intArrayToString(int[] array) {
-    //TODO possibly use Array.toString()
     String arrayOutput = "";
     int endIndex = array.length;
     for(int i = 0; i < endIndex; i++) {
@@ -516,6 +495,51 @@ public class BrobInt {
     resultBrobInt.sign = 0;
     return resultBrobInt;
   }
+  
+  /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   *  Method to get the power of ten which is equal to this
+   *  @return int with power of ten which is equal to this / -1 if this is not power of ten
+   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+  public int getPowerOfTen() {
+    int thisPowerOfTen = 0;
+    if (this.intVersion[this.intVersion.length - 1] != 1) {
+      return -1;
+    }
+    for (int i = this.intVersion.length - 2; i >= 0 && thisPowerOfTen >= 0; i--) {
+      if (this.intVersion[i] != 0) {
+        return -1;
+      }
+      thisPowerOfTen++;
+    }
+    return thisPowerOfTen;
+  }
+  
+  /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   *  Method multiply this by a given power of ten
+   *  @param int power of ten
+   *  @return BrobInt that is this times ten to the power of the parameter
+   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+  private BrobInt multiplyByPowerOfTen(int powerOfTen) {
+    int[] intVersionOutput = new int[this.intVersion.length + powerOfTen];
+    for (int i = 0; i < this.intVersion.length; i++) {
+      intVersionOutput[i + powerOfTen] = this.intVersion[i];
+    }
+    return new BrobInt(intArrayToString(intVersionOutput));
+  }
+  
+  /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   *  Method divide this by a given power of ten
+   *  @param int power of ten
+   *  @return BrobInt that is this divided by ten to the power of the parameter
+   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+  private BrobInt divideByPowerOfTen(int powerOfTen) {
+    int[] intVersionOutput = new int[this.intVersion.length - powerOfTen];
+    for (int i = 0; i < this.intVersion.length - powerOfTen; i++) {
+      intVersionOutput[i] = this.intVersion[i + powerOfTen];
+    }
+    return new BrobInt(intArrayToString(intVersionOutput));
+  }
+
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  the main method redirects the user to the test class
@@ -527,12 +551,12 @@ public class BrobInt {
      System.out.println( "\n   You should run your tests from the BrobIntTester...\n" );
       
      
-     BrobInt test1 = new BrobInt("0000099999999999999999992");
-     BrobInt test2 = new BrobInt("0000099999999999999999990");
-     BrobInt test3 = new BrobInt("159");
-     BrobInt test4 = new BrobInt("15");
-     BrobInt test5 = new BrobInt("74");
-     System.out.println(test1.subtract(test2));
+     BrobInt test1 = new BrobInt("12345");
+     BrobInt test2 = new BrobInt("47873875");
+     BrobInt test3 = new BrobInt("1000000");
+     BrobInt test4 = new BrobInt("37");
+     BrobInt test5 = new BrobInt("-0");
+     System.out.println(test2.divide(test3));
      
      System.exit( 0 );
   }
