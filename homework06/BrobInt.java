@@ -549,14 +549,6 @@ public class BrobInt {
   public static void main( String[] args ) {
      System.out.println( "\n  Hello, world, from the BrobInt program!!\n" );
      System.out.println( "\n   You should run your tests from the BrobIntTester...\n" );
-      
-     
-     BrobInt test1 = new BrobInt("12345");
-     BrobInt test2 = new BrobInt("47873875");
-     BrobInt test3 = new BrobInt("1000000");
-     BrobInt test4 = new BrobInt("37");
-     BrobInt test5 = new BrobInt("-0");
-     System.out.println(test2.divide(test3));
      
      System.exit( 0 );
   }
