@@ -110,7 +110,16 @@ public class DynamicChangeMaker {
       System.out.println("Target value must be a number");
       System.exit(0);
     }
-    
-    System.out.print("The optimal solution is: " + makeChangeWithDynamicProgramming(intInputArray, amount).toString());
+     
+    //Find the optimal solution
+    String optimalSolution = "";
+    try {
+      optimalSolution = makeChangeWithDynamicProgramming(intInputArray, amount).toString();
+    }
+    catch (IllegalArgumentException iae) {
+      System.out.println(iae.getMessage());
+      System.exit(0);
+    }
+    System.out.print("The optimal solution is: " + optimalSolution);
   }
 }
