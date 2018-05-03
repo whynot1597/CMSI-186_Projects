@@ -13,7 +13,7 @@ public class DynamicChangeMaker {
   /**
    *  The main program starts here
    *  remember the constraints from the project description
-   *  @see    http://bjohnson.lmu.build/cmsi186web/homework04.html
+   *  @see    http://bjohnson.lmu.build/cmsi186web/homework07.html
    *  @param  int[]  int array containing coin denomination
    *  @param  int    int total target amount
    *  @return Tuple that is the optimized set of coins to reach the target
@@ -22,25 +22,30 @@ public class DynamicChangeMaker {
   public static Tuple makeChangeWithDynamicProgramming(int denoms[], int amount) throws IllegalArgumentException {
     handleInitialArguments(denoms, amount);
     Tuple table[][] = new Tuple[denoms.length][amount + 1];
+    
+    //Sets all elements at 0 column to 0 tuple
     for (int i = 0; i < denoms.length; i++) {
       table[i][0] = new Tuple(denoms.length);
     }
-    for (int j = 0; j < denoms.length; j++) {
-      for (int i = 1; i <= amount; i++) {
-        if (i - denoms[j] < 0) {
-          table[j][i] = Tuple.IMPOSSIBLE;
+    
+    //Main calculation loops
+    for (int rowIndex = 0; rowIndex < denoms.length; rowIndex++) {
+      for (int columnIndex = 1; columnIndex <= amount; columnIndex++) {
+        if (columnIndex - denoms[rowIndex] < 0) {
+          table[rowIndex][columnIndex] = Tuple.IMPOSSIBLE;
         } else {
-          table[j][i] = new Tuple(denoms.length);
-          table[j][i].setElement(j, 1);
-          if (table[j][i - denoms[j]].isImpossible()) {
-            table[j][i] = Tuple.IMPOSSIBLE;
+          table[rowIndex][columnIndex] = new Tuple(denoms.length);
+          table[rowIndex][columnIndex].setElement(rowIndex, 1);
+          if (table[rowIndex][columnIndex - denoms[rowIndex]].isImpossible()) {
+            table[rowIndex][columnIndex] = Tuple.IMPOSSIBLE;
           } else {
-            table[j][i] = (table[j][i]).add(table[j][i - denoms[j]]);
+            table[rowIndex][columnIndex] = (table[rowIndex][columnIndex]).add(table[rowIndex][columnIndex - denoms[rowIndex]]);
           }
         }
-        if (j > 0 && !(table[j - 1][i].isImpossible())) {
-          if (table[j][i].isImpossible() || (table[j - 1][i].total() < table[j][i].total())) {
-            table[j][i] = table[j - 1][i];
+        if (rowIndex > 0 && !(table[rowIndex - 1][columnIndex].isImpossible())) {
+          if (table[rowIndex][columnIndex].isImpossible() || 
+             (table[rowIndex - 1][columnIndex].total() < table[rowIndex][columnIndex].total())) {
+            table[rowIndex][columnIndex] = table[rowIndex - 1][columnIndex];
           }
         }
       }
@@ -110,7 +115,7 @@ public class DynamicChangeMaker {
       System.out.println("Target value must be a number");
       System.exit(0);
     }
-     
+    
     //Find the optimal solution
     String optimalSolution = "";
     try {
