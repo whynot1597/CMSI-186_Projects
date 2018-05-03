@@ -49,6 +49,7 @@ public class DynamicChangemakerTestHarness {
       test_BogusDenomintaions1();
       test_BogusDenomintaions2();
       test_BogusDenomintaions3();
+      test_BogusDenominations5();
 
       System.out.println( "\n\nResults:\n      " + successes + "/" + attempts + " tests passed." );
    }
@@ -201,6 +202,30 @@ public class DynamicChangemakerTestHarness {
          e.printStackTrace();
          displayFailure();
       }
+
+      newDenominations  = new int[] { 11, 13, 17, 19, 23  };
+      System.out.println( "\n    Test" + makeTwoDigits() + ": testing for optimalsolution for 1357911 cents using " + Arrays.toString( newDenominations ) + ": " );
+      System.out.println( "      This will take a second or two - please be patient......" );
+      result = DynamicChangeMaker.makeChangeWithDynamicProgramming( newDenominations, 1357911 );
+      try {
+         System.out.print( "      expecting Tuple: <1,2,0,0,59038>: " );
+         displaySuccessIfTrue( "<1,2,0,0,59038>".equals( result.toString() ) );
+      } catch (Exception e) {
+         e.printStackTrace();
+         displayFailure();
+      }
+
+      newDenominations  = new int[] { 23, 19, 17, 13, 11  };
+      System.out.println( "\n    Test" + makeTwoDigits() + ": testing for optimalsolution for 1357911 cents using " + Arrays.toString( newDenominations ) + ": " );
+      System.out.println( "      This will take a second or two - please be patient......" );
+      result = DynamicChangeMaker.makeChangeWithDynamicProgramming( newDenominations, 1357911 );
+      try {
+         System.out.print( "      expecting Tuple: <59037,2,0,0,2>: " );
+         displaySuccessIfTrue( "<59037,2,0,0,2>".equals( result.toString() ) );
+      } catch (Exception e) {
+         e.printStackTrace();
+         displayFailure();
+      }
    }
 
    public static void test_Euros() {
@@ -344,7 +369,7 @@ public class DynamicChangemakerTestHarness {
       System.out.println( "          expecting: success: " );
       System.out.print  ( "            and got: " );
       try {
-         Tuple result = DynamicChangeMaker.makeChangeWithDynamicProgramming( badDenominations, 2345 );
+         DynamicChangeMaker.makeChangeWithDynamicProgramming( badDenominations, 2345 );
       }
       catch(NonpositiveDenominationException nde) {
         displaySuccessIfTrue(true);
@@ -364,7 +389,7 @@ public class DynamicChangemakerTestHarness {
       System.out.println( "          expecting: success: " );
       System.out.print  ( "            and got: " );
       try {
-         Tuple result = DynamicChangeMaker.makeChangeWithDynamicProgramming( badDenominations, 2345 );
+         DynamicChangeMaker.makeChangeWithDynamicProgramming( badDenominations, 2345 );
       }
       catch(NonpositiveDenominationException nde) {
         displaySuccessIfTrue(true);
@@ -384,7 +409,7 @@ public class DynamicChangemakerTestHarness {
       System.out.println( "          expecting: success: " );
       System.out.print  ( "            and got: " );
       try {
-         Tuple result = DynamicChangeMaker.makeChangeWithDynamicProgramming( badDenominations, 2345 );
+         DynamicChangeMaker.makeChangeWithDynamicProgramming( badDenominations, 2345 );
       }
       catch(DuplicateDenominationException dde) {
         displaySuccessIfTrue(true);
@@ -394,5 +419,25 @@ public class DynamicChangemakerTestHarness {
          displayFailure();
       }
    }
+   
+   /**
+    * method to test a bogus set of denominations which includes repeats
+    */
+    public static void test_BogusDenominations5() {
+       int[] badDenominations = new int[] { 2, 3, 17, 23 };
+       System.out.println( "\n    Test " + makeTwoDigits() + ": testing bogus negative amount......" );
+       System.out.println( "          expecting: success: " );
+       System.out.print  ( "            and got: " );
+       try {
+          DynamicChangeMaker.makeChangeWithDynamicProgramming( badDenominations, -2345 );
+       }
+       catch(NegativeTargetValueException ntve) {
+         displaySuccessIfTrue(true);
+       }
+       catch( Exception e ) {
+          e.printStackTrace();
+          displayFailure();
+       }
+    }
 
 }
