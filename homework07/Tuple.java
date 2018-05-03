@@ -79,11 +79,11 @@ public class Tuple {
   /**
    * Returns whether the tuple is impossible.
    *
-   * @return whether the tuple is imposible
+   * @return whether the tuple is impossible
    */
    public boolean isImpossible() {
-      return this == IMPOSSIBLE;
-   }
+     return this.equals( IMPOSSIBLE );
+  }
 
   /**
    * Sets the int at position i to value j.
